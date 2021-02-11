@@ -174,11 +174,8 @@ public class DirectoryBrowser {
                 if (file.isHidden() || !file.exists() || file.isDirectory() || !file.isFile()) {
                     return null;
                 }
-
-                RandomAccessFile raf;
-                try {
-                    raf = new RandomAccessFile(file, "r");
-                } catch (Exception ignore) {
+                try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+                } catch (java.lang.Exception ignore) {
                     return null;
                 }
                 long fileLength = raf.length();
